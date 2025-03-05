@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/style.css"> <!-- Link to the CSS file -->
+
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="logo">BitLinks</div>
+        <ul>
+            <li class="li"><a href="/">Home</a></li>
+            <li class="li"><a href="/about">About Us</a></li>
+            <li class="li"><a href="/contact">Contact Us</a>
+            <li class="li"><a href="/shorten">shorten</a></li>
+        </ul>
+    </nav>
+    <h1>Welcome to My Website</h1>
+    <main>
+        <div class="d1">
+            <div class="img">
+                <img src="https://img.freepik.com/free-vector/remote-working-scenes-elements_52683-56958.jpg?t=st=1738409657~exp=1738413257~hmac=a1386d4cc1157a65e8b026af202335168741925f018c0ea5b30304e0a1947ff6&w=1380"
+                    alt="this is img">
+            </div>
+            <div class="text">
+                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consectetur recusandae ex autem,
+                    eius
+                    ipsa officia doloremque dolore incidunt, cum possimus quia minus perspiciatis ab?
+                </h3>
+                <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
+
+        <div class="d2">
+        
+            <a href="/shorten"> <button class="btn" id="try">Try now</button></a>
+               <a href="/contact"> <button class="btn">Contact</button></a>
+
+         
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>&copy; 2024 BitLinks. All rights reserved.</p>
+    </footer>
+<script>
+    const trynow=document.querySelector("#try").addEventListener(onclick,async()=>{
+        await axios.get('/api/shorten', { originalUrl, shortUrl });
+    });
+
+
+</script>
+</body>
+
+</html>

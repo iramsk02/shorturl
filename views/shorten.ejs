@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    shorten
+  </title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Axios CDN -->
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="logo">BitLinks</div>
+    <ul>
+      <li class="li"><a href="/">Home</a></li>
+      <li class="li"><a href="/about">About Us</a></li>
+      <li class="li"><a href="/contact">Contact Us</a></li>
+      <li class="li"><a href="/shorten">shorten</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h1>Shorten Your URL</h1>
+    <div class="forms">
+      <form id="shortenForm">
+
+
+        <div class="inp1">
+          <label for="originalUrl">Original URL: </label>
+          <input type="text" id="originalUrl" name="originalUrl" required><br><br>
+        </div>
+        <div class="inp2">
+          <label for="shortUrl">Custom Short URL (optional): </label>
+          <input type="text" id="shortUrl" name="shortUrl"><br><br>
+        </div>
+        <button type="submit" class="subtn">Submit</button>
+      </form>
+
+      <!-- Display Shortened URL -->
+      <div id="result" onclick="goTOurl()"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 BitLinks. All rights reserved.</p>
+  </footer>
+  <script>
+
+document.getElementById('shortenForm').addEventListener('submit', async function (event) {
+  event.preventDefault(); // Prevent default form submission
+
+  const originalUrl = document.getElementById('originalUrl').value.trim();
+  const shortUrl = document.getElementById('shortUrl').value.trim();
+
+  console.log("Original URL:", originalUrl);
+  console.log("Short URL:", shortUrl);
+
+  try {
+    console.log("Submitting request...");
+
+    const API_BASE = "http://localhost:3001"; // Use localhost for now
+    const response = await axios.post(`${API_BASE}/api/shorten`, { originalUrl, shortUrl });
+
+    console.log("Response received:", response.data);
+
+    if (response.data) {
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `<p>Your shortened URL: 
+      <a class="url" style="margin: 5px; color: white;" 
+      href="${API_BASE}/${response.data.shortUrl}" target="_blank">
+      ${API_BASE}/${response.data.shortUrl}</a></p>`;
+    } else {
+      document.getElementById('result').innerHTML = '<p>Something went wrong. Try again.</p>';
+    }
+  } catch (error) {
+    console.error('Error shortening the URL:', error.response ? error.response : error.message);
+    document.getElementById('result').innerHTML = `<p>Error: ${error.response?.data || 'Server error'}</p>`;
+  }
+});
+
+
+
+  </script>
+
+</body>
+
+</html>
