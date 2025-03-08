@@ -5,8 +5,9 @@ const path = require('path');
 const urlRoutes = require('./routes/urlRoutes');  // Ensure this is correctly defined
 const cors = require('cors');
 
-const BASE_URL = process.env.BASE_URL || "http://localhost:3001";  // Change this for production
-
+const BASE_URL = process.env.BASE_URL || "http://localhost:3000";  // Change this for production
+const API_BASE = "https://your-app-name.onrender.com"; // Replace with your deployed server URL
+const API_URL = `${API_BASE}/api/shorturl`;
 
 
 
@@ -16,7 +17,7 @@ const app = express();
 dotenv.config();
 
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 
 mongoose.connect('mongodb://localhost:27017/urlshortener')
