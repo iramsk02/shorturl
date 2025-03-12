@@ -1,3 +1,105 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shorten</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="logo">Inbits</div>
+    <ul>
+      <li class="li"><a href="/">Home</a></li>
+      <li class="li"><a href="/about">About Us</a></li>
+      <li class="li"><a href="/contact">Contact Us</a></li>
+      <li class="li"><a href="/shorten">Shorten</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Shorten Your URL</h1>
+    <div class="forms">
+      <form id="shortenForm">
+        <div class="inp1">
+          <label for="originalUrl">Original URL: </label>
+          <input type="text" id="originalUrl" name="originalUrl" required><br><br>
+        </div>
+        <div class="inp2">
+          <label for="shortUrl">Custom Short URL (optional): </label>
+          <input type="text" id="shortUrl" name="shortUrl"><br><br>
+        </div>
+        <button type="submit" class="subtn">Generate Short URL</button>
+      </form>
+
+      <div id="shortenResult"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Inbits. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const API_BASE = "http://localhost:3000"; // Update as needed
+
+    // Handle URL shortening
+    document.getElementById('shortenForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const originalUrl = document.getElementById('originalUrl').value.trim();
+      const shortUrl = document.getElementById('shortUrl').value.trim();
+
+      try {
+        const response = await axios.post(`${API_BASE}/api/shorten`, { originalUrl, shortUrl });
+
+        if (response.data) {
+          document.getElementById('shortenResult').innerHTML = `<p>Your shortened URL: 
+            <a class="url" style="margin: 5px; color: white;" 
+            href="${API_BASE}/${response.data.shortUrl}" target="_blank">
+            inbits/${response.data.shortUrl}</a></p>`;
+        } else {
+          document.getElementById('shortenResult').innerHTML = '<p>Something went wrong. Try again.</p>';
+        }
+      } catch (error) {
+        console.error('Error shortening the URL:', error.response ? error.response : error.message);
+        document.getElementById('shortenResult').innerHTML = `<p>Error: ${error.response?.data || 'Server error'}</p>`;
+      }
+    });
+
+    // Handle retrieving the original URL
+    document.getElementById('resolveForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const shortUrl = document.getElementById('resolveShortUrl').value.trim();
+
+      try {
+        const response = await axios.get(`${API_BASE}/api/resolve/${shortUrl}`);
+
+        if (response.data && response.data.originalUrl) {
+          document.getElementById('resolveResult').innerHTML = `<p>Original URL: 
+            <a class="url" style="margin: 5px; color: white;" 
+            href="${response.data.originalUrl}" target="_blank">
+            ${response.data.originalUrl}</a></p>`;
+        } else {
+          document.getElementById('resolveResult').innerHTML = '<p>Short URL not found.</p>';
+        }
+      } catch (error) {
+        console.error('Error retrieving the original URL:', error.response ? error.response : error.message);
+        document.getElementById('resolveResult').innerHTML = `<p>Error: ${error.response?.data || 'Server error'}</p>`;
+      }
+    });
+  </script>
+
+</body>
+
+</html> -->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +133,7 @@
         <div class="inp2">
           <label for="shortUrl">Custom Short URL (optional): </label>
           <input type="text" id="shortUrl" name="shortUrl"><br><br>
-        </div>
+        </div class="shrtbtn">
         <button type="submit" class="subtn">Generate Short URL</button>
       </form>
 
